@@ -9,7 +9,7 @@ import (
 	"github.com/decred/gominer/stratum"
 
 	"github.com/btcsuite/btclog"
-	"github.com/jrick/logrotate/rotator"
+	rota "github.com/jrick/logrotate/rotator"
 )
 
 // logWriter implements an io.Writer that outputs to both standard output and
@@ -38,7 +38,7 @@ var (
 
 	// logRotator is one of the logging outputs.  It should be closed on
 	// application shutdown.
-	logRotator *rotator.Rotator
+	logRotator *rota.Rotator
 
 	// logRotatorPipe is the write-end pipe for writing to the log rotator.  It
 	// is written to by the Write method of the logWriter type.
@@ -71,7 +71,7 @@ func initLogRotator(logFile string) {
 		os.Exit(1)
 	}
 	pr, pw := io.Pipe()
-	r, err := rotator.New(pr, logFile, 10*1024, false, 3)
+	r, err := rota.New(pr, logFile, 10*1024, false, 3)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to create file rotator: %v\n", err)
 		os.Exit(1)
