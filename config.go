@@ -15,7 +15,8 @@ import (
 	"time"
 
 	"github.com/btcsuite/go-flags"
-	"github.com/decred/dcrutil"
+	// "github.com/decred/dcrutil"
+	"github.com/decred/dcrd/dcrutil"
 )
 
 const (
